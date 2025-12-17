@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mcpServers__join_channel",
+      "mcp__mcpServers__read_my_design",
+      "mcp__mcpServers__get_selection",
+      "mcp__mcpServers__get_document_info",
+      "mcp__mcpServers__get_node_info",
+      "Bash(mkdir:*)",
+      "mcp__mcpServers__export_node_as_image",
+      "Bash(curl:*)",
+      "Bash(dir:*)",
+      "mcp__mcpServers__get_nodes_info",
+      "mcp__mcpServers__get_reactions"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
