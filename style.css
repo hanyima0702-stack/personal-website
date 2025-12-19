@@ -608,60 +608,89 @@ body {
     overflow: hidden;
     position: relative;
     z-index: 1;
+    border: 1px solid var(--stroke-color);
 }
 
 .portfolio-detail-container {
-    height: calc(100vh - var(--nav-height));
+    height: 100vh;
     position: relative;
-    padding: var(--spacing-lg);
+    padding: 2rem;
+    padding-top: calc(var(--nav-height) + 2rem); /* 为navbar留出空间 */
     display: flex;
     flex-direction: column;
     z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .back-button-container {
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 1.5rem;
     position: relative;
+    z-index: 100;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.portfolio-detail-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: calc(100vh - var(--nav-height) - 120px); /* 减去navbar和按钮容器的高度 */
 }
 
 .back-button {
-    background: transparent;
+    background: rgba(21, 29, 107, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: var(--text-primary);
     font-family: var(--font-family-chinese);
     font-weight: 400;
     font-size: 16px;
-    padding: var(--spacing-sm) var(--spacing-lg);
+    padding: 0.75rem 1.5rem 0.75rem 3rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: var(--border-radius);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
     text-align: left;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
+    display: inline-block;
     position: relative;
-    z-index: 10;
+    z-index: 100;
     min-height: 44px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1.5;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.back-button span {
+    position: relative;
+    z-index: 2;
 }
 
 .back-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(-3px);
+    background: rgba(21, 29, 107, 0.95);
+    transform: translateX(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 .back-button::before {
     content: '←';
-    display: inline-block;
-    margin-right: var(--spacing-sm);
-    transition: transform 0.3s ease;
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 18px;
     line-height: 1;
+    z-index: 1;
 }
 
 .back-button:hover::before {
-    transform: translateX(-3px);
+    transform: translateY(-50%) translateX(-4px);
 }
 
 .back-button:focus {
@@ -672,93 +701,102 @@ body {
 .portfolio-detail-content {
     flex: 1;
     overflow-y: auto;
-    padding-right: var(--spacing-md);
+    padding-right: 1rem;
     width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
+/* 自定义滚动条样式 */
 .portfolio-detail-content::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 .portfolio-detail-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
 }
 
 .portfolio-detail-content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    transition: background 0.3s ease;
 }
 
 .portfolio-detail-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .portfolio-detail-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 2rem;
     width: 100%;
+    padding: 0 1rem;
 }
 
 .portfolio-detail-title {
     font-family: var(--font-family-chinese);
-    font-weight: 400;
-    font-size: 40px;
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3rem); /* 响应式字体大小 */
     color: var(--text-primary);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.17;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .portfolio-detail-subtitle {
     font-family: var(--font-family-chinese);
     font-weight: 400;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
     color: var(--text-primary);
-    line-height: 1.33;
-    opacity: 0.8;
+    line-height: 1.5;
+    opacity: 0.75;
+    max-width: 600px;
 }
 
 .portfolio-image-grid {
-    display: flex;
-    gap: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem; /* 视觉上舒适的间距 */
     width: 100%;
-    margin-bottom: var(--spacing-xxl);
+    max-width: 900px; /* 略大于设计稿，提供更好的视觉呼吸空间 */
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
 }
 
 .portfolio-column {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: 2.5rem; /* 垂直间距保持一致 */
 }
 
 .portfolio-image-item {
     position: relative;
     background: var(--card-bg);
-    border-radius: var(--border-radius);
+    border-radius: 8px; /* 稍大的圆角，更现代的视觉效果 */
     overflow: hidden;
     cursor: default;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
+    aspect-ratio: 276/391; /* 基础比例，高度通过内联样式调整 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .portfolio-image-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-medium);
-}
-
-.portfolio-image-item.tall {
-    flex: 2; /* Make tall items take more space */
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
 .portfolio-image-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95);
 }
 
 .portfolio-image-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    filter: brightness(1);
 }
 
 .scroll-indicator {
@@ -803,57 +841,99 @@ body {
     transform: scale(1.05);
 }
 
-.image-overlay {
+/* 现代化的覆盖层效果 */
+.portfolio-image-item .image-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.47);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
+    backdrop-filter: blur(4px);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
 }
 
-.portfolio-image-item:hover .image-overlay {
+.portfolio-image-item.has-overlay:hover .image-overlay {
     opacity: 1;
 }
 
-.overlay-content {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-}
-
-.overlay-icon {
-    width: 53px;
-    height: 53px;
-    border: 2px solid rgba(255, 255, 255, 0.47);
-    border-radius: 3px;
+.portfolio-image-item .overlay-icon {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-primary);
-    font-size: 24px;
+    margin-right: 16px;
+    transition: all 0.3s ease;
 }
 
-.overlay-lines {
+.portfolio-image-item .overlay-icon.large {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+}
+
+.portfolio-image-item .overlay-icon.medium {
+    width: 58px;
+    height: 58px;
+    border-radius: 6px;
+}
+
+.portfolio-image-item .overlay-icon.small {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+}
+
+.portfolio-image-item .overlay-lines {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: 6px;
+    transition: all 0.3s ease;
 }
 
-.overlay-line {
-    width: 43px;
-    height: 11px;
-    background: rgba(255, 255, 255, 0.47);
-    border-radius: 3px;
+.portfolio-image-item .overlay-line {
+    width: 48px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
-.overlay-line.short {
-    width: 30px;
+.portfolio-image-item .overlay-line.short {
+    width: 32px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+}
+
+/* 悬停时的动画效果 */
+.portfolio-image-item.has-overlay:hover .overlay-icon {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.portfolio-image-item.has-overlay:hover .overlay-lines {
+    transform: translateX(8px);
+}
+
+.portfolio-image-item.has-overlay:hover .overlay-line {
+    background: rgba(255, 255, 255, 0.9);
+    width: 56px;
+}
+
+.portfolio-image-item.has-overlay:hover .overlay-line.short {
+    width: 40px;
+    background: rgba(255, 255, 255, 0.7);
 }
 
 /* Scroll to Top Button */

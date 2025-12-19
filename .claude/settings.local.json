@@ -11,7 +11,10 @@
       "Bash(curl:*)",
       "Bash(dir:*)",
       "mcp__mcpServers__get_nodes_info",
-      "mcp__mcpServers__get_reactions"
+      "mcp__mcpServers__get_reactions",
+      "mcp__mcpServers__set_selections",
+      "mcp__mcpServers__move_node",
+      "mcp__mcpServers__resize_node"
     ],
     "deny": [],
     "ask": []
